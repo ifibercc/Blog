@@ -9,7 +9,7 @@ define([], function(){
 				$tipBox.removeClass("hide");
 			},
 			hide: function(){
-				$tipBox.addClass("hide");
+				$tipBox.removeClass("hide");
 			},
 			init: function(){
 				

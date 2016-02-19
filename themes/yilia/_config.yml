@@ -6,12 +6,12 @@ menu:
 
 # SubNav
 subnav:
-  github: "#"
+  github: "https://github.com/ifibercc"
   #weibo: "#"
   #rss: "#"
-  zhihu: "#"
+  zhihu: "https://www.zhihu.com/people/qi-xi-yang-kan-zhu"
   #douban: "#"
-  #mail: "#"
+  mail: "mailto:ifibercc@gmail.com"
   #facebook: "#"
   #google: "#"
   #twitter: "#"
@@ -35,7 +35,7 @@ google_analytics: ''
 favicon: /favicon.png
 
 #你的头像url
-avatar: img/avatar.png
+avatar: /img/avatar.png
 #是否开启分享
 share_jia: true
 share_addthis: false

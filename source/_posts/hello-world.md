@@ -1,37 +1,6 @@
 title: Hello World
+date: 2016-02-19 23:16:08
+tags:
+- life
 ---
-Welcome to [Hexo](http://hexo.io/)! This is your very first post. Check [documentation](http://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](http://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
-
-## Quick Start
-
-### Create a new post
-
-``` bash
-$ hexo new "My New Post"
-```
-
-More info: [Writing](http://hexo.io/docs/writing.html)
-
-### Run server
-
-``` bash
-$ hexo server
-```
-
-More info: [Server](http://hexo.io/docs/server.html)
-
-### Generate static files
-
-``` bash
-$ hexo generate
-```
-
-More info: [Generating](http://hexo.io/docs/generating.html)
-
-### Deploy to remote sites
-
-``` bash
-$ hexo deploy
-```
-
-More info: [Deployment](http://hexo.io/docs/deployment.html)
+第一次搭blog喽，又找到个写文章的地方，对，又，以前辗转过N多地方，百度空间，QQ空间，人人网，博客园，CSDN，SegmentFault，等等地方，拖延症加强迫症，导致全都长草了，之前在阿里云买了学生特惠，想要亲自搭个服务器的，前端加后端用node/express/mongodb等等，后来种种原因又放弃了，前两天看到了Github Pages，然后就趁机找了个静态博客框架Hexo，以迅雷不及掩耳盗铃之势搭起来，强烈谴责拖延症，以后发东西就在这儿喽，请多支持~
