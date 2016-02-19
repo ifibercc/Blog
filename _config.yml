@@ -7,7 +7,7 @@ title: Lemoo's Blog
 subtitle:
 description:
 author: Lemoo
-language: zh
+language: zh-Hans
 timezone:
 
 # URL
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: yelee
+theme: yilia
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
