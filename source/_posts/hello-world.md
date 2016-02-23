@@ -7,7 +7,8 @@ tags:
 
 本博客借用GitHub Pages作为服务器，Hexo作为静态博客发布工具，买的万网的域名解析，全部开源免费，用到的技术和插件如下：
 - GitHub Pages
-- Hexo
+- Git
 - NodeJS
+- Hexo
 - 不蒜子
 - 多说
