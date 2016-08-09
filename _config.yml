@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Lemoo's Blog
+title: House of Cards
 subtitle: Keep surprising people.
 description: Keep surprising people.
 author: 景初
@@ -75,3 +75,9 @@ deploy:
 
 # third plugins
 duoshuo_shortname: ifibercc
+
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
