@@ -5,8 +5,8 @@
 # Site
 title: Lemoo's Blog
 subtitle: Keep surprising people.
-description:
-author: Lemoo
+description: Keep surprising people.
+author: 景初
 language: zh-Hans
 timezone:
 
@@ -63,7 +63,8 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: yilia
+theme: next
+avatar: uploads/avatar.jpg
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
@@ -71,3 +72,6 @@ deploy:
   type: git
   repository: git@github.com:ifibercc/ifibercc.github.io.git
   branch: master
+
+# third plugins
+duoshuo_shortname: ifibercc
