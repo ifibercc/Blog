@@ -125,7 +125,7 @@ social:
   #Twitter: https://twitter.com/your-user-name
   微博: http://weibo.com/ifibercc
   #豆瓣: http://douban.com/people/your-user-name
-  知乎: http://www.zhihu.com/people/ifibercc
+  #知乎: http://www.zhihu.com/people/ifibercc
   Mail: mailto:ifibercc@gmail.com
 
 
@@ -142,7 +142,7 @@ social_icons:
   #Twitter: twitter
   微博: weibo
   Mail: envelope
-  知乎: transgender
+  #知乎: transgender
 
 
 # Sidebar Avatar
@@ -391,7 +391,7 @@ vendors:
 
   # Internal version: 4.4.0
   # http://fontawesome.io/
-  fontawesome: http://apps.bdimg.com/libs/fontawesome/4.4.0/css/font-awesome.min.css
+  fontawesome: http://cdn.staticfile.org/font-awesome/4.2.0/css/font-awesome.min.css
 
 
 # Assets
