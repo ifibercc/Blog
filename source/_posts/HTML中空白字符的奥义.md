@@ -31,3 +31,4 @@ tags:
 `ANSI（ASCII）` => `GB2312` => `GBK` => `DBCS` => `Unicode` => `UTF`
 ## 参考
 - [Unicode 和 UTF-8 有何区别？ - 于洋的回答](https://www.zhihu.com/question/23374078)
+- [【第667期】HTML 不同空格的特性与表现研究 - 前端早读课](http://mp.weixin.qq.com/s?__biz=MjM5MTA1MjAxMQ==&mid=2651222451&idx=1&sn=243e858964dbc3cf151e4efbbf175ddf&scene=4#wechat_redirect)
