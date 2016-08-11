@@ -16,8 +16,8 @@ tags:
 | U+2002  | `&ensp;`    | En空格或（En Space）或Nut                       |
 | U+2003  | `&emsp;`    | Em空格或（Em Space）或Mutton                    |
 | U+2009  | `&thinsp;`  | 窄空格（Thin Space）                            |
-| U+200C  | `&zwnj;`    | 零宽不连字（Zero Width Non Joiner，简称“ZWNJ”）  |
-| U+200D  | `&zwj;`     | 零宽连字（Zero Width Joniner，简称“ZWJ”）        |
+| U+200C  | `&zwnj;`    | 零宽不连字（Zero Width Non Joiner）  |
+| U+200D  | `&zwj;`     | 零宽连字（Zero Width Joniner）        |
 
 ## 2.1 不换行空格
 不换行空格只有`&nbsp;`一种，其不会被浏览器判断为可以在中间打断
