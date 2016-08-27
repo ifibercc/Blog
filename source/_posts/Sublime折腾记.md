@@ -92,6 +92,8 @@ Setting:
         "Vintage"
     ],
     "tab_size": 4,
+    "color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
+    "theme": "Material-Theme-Darker.sublime-theme",
     "translate_tabs_to_spaces": true
 }
 
