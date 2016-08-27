@@ -9,11 +9,11 @@ tags:
 
 针对一个后端是Java的前端空城师，那么这个年代我的编辑器/IDE选择有如下几个：
 
-- (IntelliJ IDEA)[https://www.jetbrains.com/idea/]
-- (WebStorm)[https://www.jetbrains.com/webstorm/]
-- (Sublime Text)[http://www.sublimetext.com/]
-- (Atom)[https://atom.io/]
-- (Visual Studio Code)[https://code.visualstudio.com]
+- [IntelliJ IDEA](https://www.jetbrains.com/idea/)
+- [WebStorm](https://www.jetbrains.com/webstorm/)
+- [Sublime Text](http://www.sublimetext.com/)
+- [Atom](https://atom.io/)
+- [Visual Studio Code](https://code.visualstudio.com)
 
 OK，下面开始撕逼，每个群里和论坛里都有旷日持久的编辑器大战，框架大战。其实最终的结论都是一个，**适合自己的才是最好的**，所以我说说我现在选择编辑器的几个因素：
 
@@ -29,7 +29,7 @@ OK，下面开始撕逼，每个群里和论坛里都有旷日持久的编辑器
 
 ### 2.1 下载
 
-链接在这儿 (Sublime Text)[http://www.sublimetext.com/]
+链接在这儿 [Sublime Text](http://www.sublimetext.com/)
 
 ### 2.2 破解
 
