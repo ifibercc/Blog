@@ -69,3 +69,30 @@ OK，下面开始撕逼，每个群里和论坛里都有旷日持久的编辑器
 前端必备`Emmet`
 
 预览Markdown`Markdown Preview`
+
+## 3. My Options
+
+Packages:
+- Bracket Highlighter
+- ConvertToUTF8
+- Trailing Spaces
+- Emmet
+- Markdown Preview
+- SideBarEnhancement
+- HTML/CSS/JS Prettey
+
+Setting:
+```
+{
+    "draw_white_space": "all",
+    "font_face": "Consolas",
+    "font_size": 14,
+    "ignored_packages":
+    [
+        "Vintage"
+    ],
+    "tab_size": 4,
+    "translate_tabs_to_spaces": true
+}
+
+```
