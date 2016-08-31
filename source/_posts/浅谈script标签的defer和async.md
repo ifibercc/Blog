@@ -1,0 +1,119 @@
+title: 浅谈script标签的defer和async
+date: 2016-08-31 00:29:45
+tags:
+- tech
+- JavaScript
+---
+
+## 1. 什么鬼
+
+今天在做一个小需的时候，忽然看到前辈一句吊炸天的代码
+
+```
+    <script src="#link("xxxx/xx/home/home.js")" type="text/javascript" async defer></script>
+```
+
+卧槽，竟然同时有`async`和`defer`属性，心想着肯定是前辈老司机的什么黑科技，两个一块儿肯定会发生什么神奇化学反应，于是赶紧怀着一颗崇敬的心去翻书翻文档，先复习一下各自的定义。
+
+## 2. 调查一番
+
+先看看`async`和`defer`各自的定义吧，翻开红宝书望远镜，是这么介绍的
+
+### 2.1 defer
+
+> 这个属性的用途是表明脚本在执行时不会影响页面的构造。也就是说，脚本会被延迟到整个页面都解析完毕后再运行。因此，在`<script>`元素中设置`defer`属性，相当于告诉浏览器立即下载，但延迟执行。
+
+> HTML5规范要求脚本按照它们出现的先后顺序执行，因此第一个延迟脚本会先于第二个延迟脚本执行，而这两个脚本会先于`DOMContentLoaded`事件执行。**在现实当中**，延迟脚本并不一定会按照顺序执行，也不一定会在`DOMContentLoad`时间触发前执行，因此最好只包含一个延迟脚本。
+
+### 2.2 async
+
+> 这个属性与`defer`类似，都用于改变处理脚本的行为。同样与`defer`类似，`async`只适用于外部脚本文件，并告诉浏览器立即下载文件。但与`defer`不同的是，标记为`async`的脚本并不保证按照它们的先后顺序执行。
+
+> 第二个脚本文件可能会在第一个脚本文件之前执行。因此确保两者之间互不依赖非常重要。指定`async`属性的目的是不让页面等待两个脚本下载和执行，从而异步加载页面其他内容。
+
+概括来讲，就是这两个属性都会使script标签异步加载，然而执行的时机是不一样的。引用[segmentfault](https://segmentfault.com/q/1010000000640869)上的一个回答中的一张图![segmentfault](/uploads/img/001-line.jpg)蓝色线代表网络读取，红色线代表执行时间，这俩都是针对脚本的；绿色线代表 HTML 解析。
+
+也就是说`async`是乱序的，而`defer`是顺序执行，这也就决定了`async`比较适用于百度分析或者谷歌分析这类不依赖其他脚本的库。从图中可以看到一个普通的`<script>`标签的加载和解析都是同步的，会阻塞DOM的渲染，这也就是我们经常会把`<script>`写在`<body>`底部的原因之一，为了防止加载资源而导致的长时间的白屏，另一个原因是js可能会进行DOM操作，所以要在DOM全部渲染完后再执行。
+
+### 2.3 really？
+
+**然而**，这张图（几乎是百度搜到的唯一答案）是不严谨的，这只是规范的情况，大多数浏览器在实现的时候会作出优化。
+
+来看看chrome是怎么做的
+
+> 《WebKit技术内幕》：
+> 1. 当用户输入网页URL的时候，WebKit调用其资源加载器加载该URL对应的网页。
+> 2. 加载器依赖网络模块建立连接，发送请求并接受答复。
+> 3. WebKit接收到各种网页或者资源的数据，其中某些资源可能是同步或异步获取的。
+> 4. 网页被交给HTML解释器转变成一系列的词语（Token）。
+> 5. 解释器根据词语构建节点（Node），形成DOM树。
+> 6. 如果节点是JavaScript代码的话，调用JavaScript引擎解释并执行。
+> 7. JavaScript代码可能会修改DOM树的结构。
+> 8. 如果节点需要依赖其他资源，例如图片、CSS、视频等，调用资源加载器来加载他们，但是他们是异步的，不会阻碍当前DOM树的继续创建；如果是JavaScript资源URL（没有标记异步方式），则需要停止当前DOM树的创建，直到JavaScript的资源加载并被JavaScript引擎执行后才继续DOM树的创建。
+
+**所以**，通俗来讲，chrome浏览器首先会请求HTML文档，然后对其中的各种资源调用相应的资源加载器进行异步网络请求，同时进行DOM渲染，直到遇到`<script>`标签的时候，主进程才会停止渲染等待此资源加载完毕然后调用V8引擎对js解析，继而继续进行DOM解析。我的理解如果加了`async`属性就相当于单独开了一个进程去独立加载和执行，而`defer`是和将`<script>`放到`<body>`底部一样的效果。
+
+## 3. 实验一发
+
+### 3.1 demo
+
+为了验证上面的结论我们来测试一下
+
+```
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.css" rel="stylesheet">
+        <link href="http://cdn.staticfile.org/foundation/6.0.1/css/foundation.css" rel="stylesheet">
+        <script src="http://lib.sinaapp.com/js/angular.js/angular-1.2.19/angular.js"></script>
+        <script src="http://libs.baidu.com/backbone/0.9.2/backbone.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+    </head>
+    <body>
+        ul>li{这是第$个节点}*1000
+    </body>
+    </html>
+```
+
+一个简单的demo，从各个CDN上引用了2个CSS3个JS，在body里面创建了1000个li。通过调整外部引用资源的位置和加入相关的属性利用chrome的Timeline进行验证。
+
+### 3.2 放置在`<head>`内
+![head](/uploads/img/002-head.jpg)
+异步加载资源，但会阻塞`<body>`的渲染会出现白屏，按照顺序立即执行脚本
+### 3.3 放置在`<body>`底部
+![body](/uploads/img/003-body.jpg)
+异步加载资源，等`<body>`中的内容渲染完毕后且加载完按顺序执行JS
+### 3.3 放置在`<head>`头部并使用`async`
+![async](/uploads/img/004-async.jpg)
+异步加载资源，且加载完JS资源立即执行，并不会按顺序，谁快谁先上
+### 3.4 放置在`<head>`头部并使用`defer`
+![defer](/uploads/img/005-defer.jpg)
+异步加载资源，在DOM渲染后之后再按顺序执行JS
+### 3.5 放置在`<head>`头部并同时使用`async`和`defer`
+![both](/uploads/img/006-both.jpg)
+表现和`async`一致，开了个脑洞，把这两个属性交换一下位置，看会不会有覆盖效果，结果发现是一致的 = =、
+
+**综上**，在webkit引擎下，建议的方式仍然是把`<script>`写在`<body>`底部，如果需要使用百度谷歌分析或者不蒜子等独立库时可以使用`async`属性，若你的`<script>`标签必须写在`<head>`头部内可以使用`defer`属性
+
+## 4. 兼容性
+
+那么，揣摩一下前辈的心理，同时写上的原因是什么呢，兼容性?
+
+上caniuse，[async](http://caniuse.com/#search=async)在IE<=9时不支持，其他浏览器OK；[defer](http://caniuse.com/#search=defer)在IE<=9时支持但会有bug，其他浏览器OK；现象在这个[issue](https://github.com/h5bp/lazyweb-requests/issues/42)里有描述，这也就是“望远镜”里建议只有一个`defer`的原因。所以两个属性都指定是为了在`async`不支持的时候启用`defer`，但`defer`在某些情况下还是有bug。
+
+> The defer attribute may be specified even if the async attribute is specified, to cause legacy Web browsers that only support defer (and not async) to fall back to the defer behavior instead of the synchronous blocking behavior that is the default.
+
+## 5. 结论
+
+其实这么讲来，最稳妥的办法还是把`<script>`写在`<body>`底部，没有兼容性问题，没有白屏问题，没有执行顺序问题，高枕无忧，不要搞什么`defer`和`async`的花啦~
+
+目前只研究了chrome的webkit的渲染机制，Firefox和IE的有待继续研究，图片和CSS以及其他外部资源的渲染有待研究。
+
+
+## 参考
+- [JavaScript高级程序设计](https://book.douban.com/subject/10546125/)
+- [WebKit技术内幕](https://book.douban.com/subject/25910556/)
+- [defer和async的区别](https://segmentfault.com/q/1010000000640869)
+- [www.w3.org](https://www.w3.org/TR/html5/scripting-1.html#attr-script-async)
