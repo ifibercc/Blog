@@ -85,6 +85,7 @@ Setting:
 ```
 {
     "draw_white_space": "all",
+    "disable_pyv8_update": true,
     "font_face": "Consolas",
     "font_size": 14,
     "ignored_packages":
