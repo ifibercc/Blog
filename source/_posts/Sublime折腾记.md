@@ -35,7 +35,17 @@ OK，下面开始撕逼，每个群里和论坛里都有旷日持久的编辑器
 
 禁忌话题，你懂得，如果没有注册的话保存五次就会弹出提示框，很烦，去网上搜Lisence，一堆一堆的
 
-### 2.3 DIY
+### 2.3 Package Control
+
+如果要使用Sublime Text那么肯定要安装插件，如果要安装插件那么一定要安装[Package Control](https://packagecontrol.io/installation)，如果是ST3那么复制以下代码进控制台(`ctrl + ~`)，回车运行
+
+```
+import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)
+```
+
+然后按`ctrl + shift + p`进入Package Control输入`install package`即可搜索并安装插件
+
+## 3. DIY
 
 拿来一款编辑器，首先要调整成自己喜欢的姿态，包括一堆插件和配置项
 
