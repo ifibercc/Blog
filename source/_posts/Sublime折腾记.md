@@ -46,9 +46,9 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
 然后按`ctrl + shift + p`进入Package Control输入`install package`即可搜索并安装插件
 
 ## 3. DIY
-
 拿来一款编辑器，首先要调整成自己喜欢的姿态，包括一堆插件和配置项
 
+### 3.1 字体
 先改字体和字号，写程序就要用等宽字体，很多人推荐`Source Code Pro` 号称写程序专用，然而我喜欢`Consolas`更多一点，然后字号调整成14，有个什么说法忘记了
 
 ```
@@ -56,6 +56,10 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
     "font_size": 14,
 ```
 
+### 3.2 转换UTF8 - ConvertToUTF8
+将某些中文会出现乱码的编码格式转换为UTF-8，安装插件`ConvertToUTF8`
+
+### 3.3 显示空格 - Bracket Highlighter
 有代码洁癖，我喜欢把所有空格显示出来，通过编辑器配置和安装高亮多余空格插件`Bracket Highlighter`
 
 ```
@@ -69,18 +73,33 @@ import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d
     "translate_tabs_to_spaces": true
 ```
 
+### 3.4 括号匹配 - Trailing Spaces
 在选择前置括号时，自动匹配后置括号，安装插件`Trailing Spaces`
 
 
-将某些中文会出现乱码的编码格式转换为UTF-8，安装插件`ConvertToUTF8`
 
+### 3.5 增强sidebar - SideBarEnhancements
 为了让Side Bar更牛逼，安装插件`SideBarEnhancements`
 
+### 3.6 前端利器 - Emmet
 前端必备`Emmet`
 
-预览Markdown`Markdown Preview`
+### 3.7 Markdown预览 - OmniMarkupPreviewer
+预览Markdown`OmniMarkupPreviewer`，如果遇到404问题，参见stackoverflow上这篇[帖子](http://stackoverflow.com/questions/35798823/omnimarkuppreviewer-404)，需要在`Sublime Text > Preferences > Package Settings > OmniMarkupPreviewer > Settings - User`中加入如下代码：
 
-## 3. My Options
+```
+{
+    "renderer_options-MarkdownRenderer": {
+        "extensions": ["tables", "fenced_code", "codehilite"]
+    }
+}
+```
+使用快捷键`ctrl+alt+o`预览
+
+### 3.8 颜色选择 - Color Picker
+写CSS写的多的时候要使用颜色拾色器方便开发`Color Picker`，使用快捷键`ctrl+shift+c`打开，若遇到快捷键不生效，那么有可能是因为安装了ConvertToUTF8有快捷键冲突了，打开`Sublime Text --> Preferences --> Browse Packages`，找到ConvertToUTF8文件夹并进入，找到对应操作系统的Default.sublime-keymap文件，直接删掉快捷键绑定
+
+## 4. My Options
 
 Packages:
 - Bracket Highlighter
