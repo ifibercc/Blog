@@ -1,0 +1,97 @@
+title: vue实现表格合并
+date: 2016-11-28 18:00:58
+tags:
+- JavaScript
+- vue
+---
+
+## 1. 场景
+这两天一个项目，属于子需求吧，就是要做一个页面放个简单的banner下面是张大表格用来显示数据项，纯粹为了view层操作方便，就用了vue做渲染。
+然而，对方最近又提出了一个恶心需求，需要**相邻的相同值的行数据项进行单元格合并**，这就醉了。
+
+由于使用的是vue，想到MVVM是要用数据驱动的思想，所以考虑在Model做手脚，而不是渲染出数据来后做DOM操作，当然基本的CSS还是要有的。因此这个方法对所有
+数据驱动的框架都有效，比如说Angular和React。最后的实现效果是这样的：
+![both](/uploads/img/007-combinecell.jpg)
+
+## 2. 思路
+原本的正常表格的代码长这样：
+```
+<tr v-for="item in items">
+    <td width="3%">{{ $index + 1 }}</td>
+    <td width="15%">{{item.bsO_Name}}</td>
+    <td width="8%" :class="{'overtime': overtime(item.GathDt)}">{{item.GathDt | time}}</td>
+    <td width="5%">{{item.F1}}</td>
+    <td width="5%">{{item.F2}}</td>
+    <td width="5%">{{item.F4}}</td>
+    <td width="5%">{{item.F3}}</td>
+    <td width="5%">{{item.F5}}</td>
+    <td width="5%">{{item.F6}}</td>
+    <td width="5%">{{item.F7}}</td>
+    <td width="5%">{{item.F8}}</td>
+    <td width="5%">{{item.F9}}</td>
+    <td width="5%">{{item.F10}}</td>
+</tr>
+```
+先拿正常的表格来做测试，原生的`<td>`标签就有`rowspan`属性支持单元格行合并，属性值指的是向下合并多少行，其实就相当于在本行中向下又添加了几个单元格。
+因为，如果接下来的一行还会渲染的话就会被挤下去，因此，下面被合并的单元格要隐藏掉，通过`display: none;`css控制即可。
+
+因此，每个`<td>`标签需要带有两个属性值，`rowspan`和`display`来控制每一个单元格的合并行数和是否显示。代码变成这样了
+```
+<tr v-for="item in items">
+    <td width="3%">{{ $index + 1 }}</td>
+    <td width="10%" :rowspan="item.bsO_Namespan" :class="{hidden: item.bsO_Namedis}">{{item.bsO_Name}}</td>
+    <td width="8%"  :rowspan="item.GathDtspan"   :class="{hidden: item.GathDtdis}" :class="{overtime: overtime(item.GathDt)}">{{item.GathDt | time}}</td>
+    <td width="5%"  :rowspan="item.F1span"       :class="{hidden: item.F1dis}">{{item.F1}}</td>
+    <td width="5%"  :rowspan="item.F2span"       :class="{hidden: item.F2dis}">{{item.F2}}</td>
+    <td width="5%"  :rowspan="item.F3span"       :class="{hidden: item.F3dis}">{{item.F3}}</td>
+    <td width="5%"  :rowspan="item.F4span"       :class="{hidden: item.F4dis}">{{item.F4}}</td>
+    <td width="5%"  :rowspan="item.F5span"       :class="{hidden: item.F5dis}">{{item.F5}}</td>
+    <td width="10%" :rowspan="item.F6span"       :class="{hidden: item.F6dis}">{{item.F6}}</td>
+    <td width="8%"  :rowspan="item.F7span"       :class="{hidden: item.F7dis}" :class="{overtime: overtime(item.F7)}">{{item.F7 | time}}</td>
+    <td width="5%"  :rowspan="item.F8span"       :class="{hidden: item.F8dis}">{{item.F8}}</td>
+    <td width="5%"  :rowspan="item.F9span"       :class="{hidden: item.F9dis}">{{item.F9}}</td>
+    <td width="5%"  :rowspan="item.F10span"      :class="{hidden: item.F10dis}">{{item.F10}}</td>
+    <td width="5%"  :rowspan="item.F11span"      :class="{hidden: item.F11dis}">{{item.F11}}</td>
+</tr>
+```
+其中，这两个属性有一些特征：
+
+- 要显示的单元格rowspan为>1的值，记录接下来的行数
+- 要显示的单元格display为true
+- 接下来不显示的单元格rowspan为1且display为false
+- 只有一行数据的单元格rowspan为1且display为true
+
+实际上就是设计一个算法，对于输入的表格数组，每个数据项添加两个属性，rowspan和display，并且计算出**rowspan的值为
+本列中以下相同值的行数**，以及**依据rowspan的值计算display的值是否显示**，最后将此改变后的数组输出。
+
+## 3. show me code
+```
+function combineCell(list) {
+    for (field in list[0]) {
+        var k = 0;
+        while (k < list.length) {
+            list[k][field + 'span'] = 1;
+            list[k][field + 'dis'] = false;
+            for (var i = k + 1; i <= list.length - 1; i++) {
+                if (list[k][field] == list[i][field] && list[k][field] != '') {
+                    list[k][field + 'span']++;
+                    list[k][field + 'dis'] = false;
+                    list[i][field + 'span'] = 1;
+                    list[i][field + 'dis'] = true;
+                } else {
+                    break;
+                }
+            }
+            k = i;
+        }
+    }
+    return list;
+}
+```
+
+## 4. 总结
+代码实际上很短很简单，主要借助的是kmp的思想，定义一个指针k，开始指向第一个值，然后向下比较，以此对rowspan和display设置，
+若遇到不相同的值则判断为跳出，进行下一个循环，通知指针k加上这个过程中运算的行数，进行跳转，然后比较下一个单元格的值，和kmp的指针跳转判断相同字符串一样的原理。
+
+通过`combineCell()`这个函数就可以将网络请求回来的数据进行过滤，附加上相应的值后再对vue监视的数组进行赋值操作就可以了。
+实际上此方法不仅适用于vue，数据驱动的框架都可以，包括Angular和React，要想实现表格合并，对请求回来的值过滤一下就OK。
