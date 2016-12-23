@@ -6,7 +6,7 @@
 favicon: /favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "nssa, NSSA, 景初, 暻初"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -183,11 +183,11 @@ sidebar:
 
 
 # Blogrolls
-#links_title: Links
-#links_layout: block
-#links_layout: inline
-#links:
-#  Title: http://example.com/
+links_title: Links
+# links_layout: block
+# links_layout: inline
+links:
+ lol皮肤: http://www.pifupai.com/
 
 
 # ---------------------------------------------------------------
