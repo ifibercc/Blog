@@ -12,7 +12,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: ifibercc.com
+url: mors.cc
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -69,12 +69,17 @@ avatar: http://oio5hqcfg.bkt.clouddn.com/avatar.jpg
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
-  type: git
-  repository: git@github.com:ifibercc/ifibercc.github.io.git
-  branch: master
+# - type: git
+#   repository: git@github.com:ifibercc/ifibercc.github.io.git
+#   branch: master
+- type: rsync
+  host: 47.93.36.115
+  user: root
+  root: /home/hexo/
+  port: 22
 
 # third plugins
-duoshuo_shortname: ifibercc
+duoshuo_shortname: Mors
 
 feed:
   type: atom
