@@ -6,7 +6,7 @@
 favicon: /favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "nssa, NSSA, 景初, 暻初"
+keywords: "Mors, 景初, 暻初"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -123,9 +123,9 @@ font:
 social:
   GitHub: https://github.com/ifibercc
   #Twitter: https://twitter.com/your-user-name
-  微博: http://weibo.com/ifibercc
-  #豆瓣: http://douban.com/people/your-user-name
-  #知乎: http://www.zhihu.com/people/ifibercc
+  # 微博: http://weibo.com/ifibercc
+  # 豆瓣: http://douban.com/people/your-user-name
+  知乎: http://www.zhihu.com/people/ifibercc
   Mail: mailto:ifibercc@gmail.com
 
 
@@ -140,9 +140,9 @@ social_icons:
   # KeyMapsToSocalItemKey: NameOfTheIconFromFontAwesome
   GitHub: github
   #Twitter: twitter
-  微博: weibo
+  # 微博: weibo
   Mail: envelope
-  #知乎: transgender
+  知乎: transgender
 
 
 # Sidebar Avatar
@@ -187,7 +187,7 @@ links_title: Links
 # links_layout: block
 # links_layout: inline
 links:
- lol皮肤: http://www.pifupai.com/
+#  lol皮肤: http://www.pifupai.com/
 
 
 # ---------------------------------------------------------------
@@ -266,7 +266,7 @@ mathjax:
 #add_this_id:
 
 # Share
-duoshuo_share: true
+# duoshuo_share: true
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
@@ -283,11 +283,11 @@ duoshuo_share: true
 # Make duoshuo show UA
 # user_id must NOT be null when admin_enable is true!
 # you can visit http://dev.duoshuo.com get duoshuo user id.
-duoshuo_info:
-  ua_enable: true
-  admin_enable: true
-  user_id: 6252950364480341000
-  admin_nickname: 老大
+# duoshuo_info:
+#   ua_enable: true
+#   admin_enable: true
+#   user_id: 6252950364480341000
+#   admin_nickname: 老大
 
 
 # Facebook SDK Support.
@@ -330,7 +330,7 @@ busuanzi_count:
   # custom pv span for one page only
   page_pv: true
   page_pv_header: <i class="fa fa-file-o"></i>
-  page_pv_footer: 
+  page_pv_footer:
 
 # Tencent analytics ID
 # tencent_analytics:
